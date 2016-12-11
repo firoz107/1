@@ -1,0 +1,48 @@
+<?php
+$userid = $_SESSION['NAME'];
+?>
+
+<h1>Welcome <?php echo $userid; ?> </h1>
+
+//Fetch User Names
+	
+	$qry="SELECT * FROM users";
+	$result=mysql_query($qry) or die(mysql_error());
+	//Check whether the query was successful or not
+	
+	if($result) {
+		while(mysql_num_rows($result) > 0) {
+			//Fetch User Names
+			$member = mysql_fetch_array($result);
+			echo '<table>';
+			echo '<tr><td>' + $member['name'] + '</td></tr>';
+			echo </table>';
+		}
+	}else {
+		die("Query failed");
+	}
+	
+	if($result) {
+		if(mysql_num_rows($result) > 0) {
+			//Fetch User Names
+			$member = mysql_fetch_array($result);
+			echo "<table>";
+			echo "<tr><td>" + $member['name'] + "</td></tr>";
+			echo "</table>";
+			
+			exit();
+		}else {
+			//Login failed
+			$errmsg_arr[] = 'user name not found';
+			$errflag = true;
+			if($errflag) {
+				
+				exit();
+			}
+		}
+	}else {
+		die("Query failed");
+	}
+
+	
+	<input type="checkbox" id="<?php echo $member['id']; ?>" name="uname" ><?php echo $member['name']; ?>
